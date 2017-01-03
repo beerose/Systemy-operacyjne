@@ -1,6 +1,6 @@
 /*
 Autor programu: Aleksandra Sikora
-Tytuł programu: Uniwersalny symulator algorytmów planowania przydziału procesora
+Tytuł programu: Uniwersalny symulator algorytmów planowania procesów
 Data wydania: 04-01-16
 */
 #include<stdio.h>
