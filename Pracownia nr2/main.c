@@ -1,13 +1,14 @@
 /*
 Autor programu: Aleksandra Sikora
 Tytuł programu: Uniwersalny symulator algorytmów planowania procesów
-Data wydania: 04-01-16
+Data wydania: 03-01-16
 */
 #include<stdio.h>
 
 
 int main()
-{	int number;
+{	
+	int number;
 
 	int b_time[30];
 	int w_time[30];
@@ -31,7 +32,9 @@ int main()
   	int  pre[10];
   	int  wait_time = 0, turnaroundd_time = 0;
 
-	printf("\nWybierz odpowiednią cyfrę:\n 1 - algorytm FCFS\n 2 - algorytm SJF \n 3 - planowanie priorytetowe \n 4 - planowanie rotacyjne \n");
+	printf("\nWybierz odpowiednią cyfrę:\n 1 - algorytm FCFS\n ");
+	printf("2 - algorytm SJF \n 3 - planowanie priorytetowe \n ");
+	printf("4 - planowanie rotacyjne \n");
 	scanf("%d",&number);
 
 
@@ -55,13 +58,16 @@ int main()
 				        w_time[i] = w_time[i] + b_time[j];
 				}
 			}
-			printf("\nProces\t\tCzas trwania fazy\tCzas przetwarzania\tCzas cyklu przetwarzania\n");
+			printf("\nProces\t\tCzas trwania fazy\tCzas przetwarzania");
+			printf("\tCzas cyklu przetwarzania\n");
 			for(i = 0; i < total; i++)
 			{
 				t_time[i] = b_time[i] + w_time[i];    
 				a_w_time = a_w_time + w_time[i];	
 				a_t_time = a_t_time + t_time[i];
-				printf("\nProces [%d]\t\t\t%.2d\t\t%.2d\t\t%.2d", i + 1, b_time[i], w_time[i], t_time[i]);
+				printf("\nProces [%d]", i + 1);
+				printf("\t\t%.2d\t\t\t%.2d", b_time[i], w_time[i]);
+				printf("\t\t\t%.2d",t_time[i] );
 			}
 			printf("\n");
 			a_w_time = a_w_time / i;
@@ -76,11 +82,13 @@ int main()
 			
 				printf("\nWpisz liczbę procesów:\t");
 		    	scanf("%d", &total); 
+		    	printf("Wpisz czas trwania fazy procesów:\t\n");
 		    	for(i = 0; i < total; i++)
 		    	{
-		    	printf("Wpisz czas trwania fazy procesów:\t");
+		    	printf("Proces [%d]:", i + 1);
 				scanf("%d", &b_time[i]);
 				process[i] = i + 1; 
+				}
 		    	for(i = 0; i < total; i++)
 		    	{
 					position = i;
@@ -107,13 +115,15 @@ int main()
 							    w_time[i] = w_time[i] + b_time[j];
 					} 
 		    	}
-		    	printf("\nProces\t\tCzas trwania fazy\tCzas przetwarzania\tCzas cyklu przetwarzania\n");
+		    	printf("\nProces\t\tCzas trwania fazy\tCzas przetwarzania");
+		    	printf("\tCzas cyklu przetwarzania\n");
 		    	for(i = 0; i < total; i++)
 				{
 					t_time[i] = b_time[i] + w_time[i];   
 					a_w_time = a_w_time + w_time[i];	
 					a_t_time = a_t_time + t_time[i];
-					printf("\nProces [%d]\t\t%.2d\t\t\t%.2d\t\t\t%.2d", process[i], b_time[i], w_time[i], t_time[i]);
+					printf("\nProces [%d]\t\t%.2d", process[i], b_time[i]);
+					printf("\t\t\t%.2d\t\t\t%.2d", w_time[i], t_time[i]);
 				}
 				printf("\n");
 				a_w_time = a_w_time / i;
@@ -166,13 +176,15 @@ int main()
 						w_time[i] = w_time[i] + b_time[j];
 					}
 		    	}
-		    	printf("\nProces\t\tCzas trwania fazy\tCzas przetwarzania\tCzas cyklu przetwarzania\n");
+		    	printf("\nProces\t\tCzas trwania fazy\tCzas przetwarzania");
+		    	printf("\tCzas cyklu przetwarzania\n");
 		    	for(i = 0; i < total; i++)
 				{
 					t_time[i] = b_time[i] + w_time[i];    
 					a_w_time = a_w_time + w_time[i];	
 					a_t_time = a_t_time + t_time[i];
-					printf("\nProces [%d]\t\t%.2d\t\t\t%.2d\t\t\t%.2d", process[i], b_time[i], w_time[i], t_time[i]);
+					printf("\nProces [%d]\t\t%.2d", process[i], b_time[i]);
+					printf("\t\t\t%.2d\t\t\t%.2d",w_time[i], t_time[i] );
 				}
 				printf("\n");
 				a_w_time = a_w_time / i;
@@ -199,7 +211,8 @@ int main()
 			  	} 
 			  	printf("\nWpisz kwant czasu:\t"); 
 			  	scanf("%d", &time_quantum); 
-			    printf("\nProces\t\tCzas trwania fazy\t Czas cyklu przetwarzania\t Czas oczekiwania\n");
+			    printf("\nProces\t\tCzas trwania fazy");
+			    printf("\t Czas cyklu przetwarzania\t Czas oczekiwania\n");
 			  	for(sum = 0, i = 0; j != 0;) 
 			  	{ 
 		    		if(tmp[i] <= time_quantum && tmp[i] > 0) 
@@ -218,7 +231,8 @@ int main()
 		    		if(tmp[i] == 0 && counter == 1) 
 		    		{ 
 		      			j--; 
-		 				printf("\nProces[%d]\t\t%d ms\t\t\t %d ms\t\t\t\t %d ms", i + 1, b_time[i], sum ,sum - b_time[i]);
+		 				printf("\nProces[%d]\t\t%d", i + 1, b_time[i]);
+		 				printf("\t\t\t%d\t\t\t\t%d", sum ,sum - b_time[i]);
 		      			wait_time = wait_time + sum - b_time[i]; 				
 		      			turnaroundd_time = turnaroundd_time + sum ; 			
 		      			counter = 0; 
@@ -235,8 +249,8 @@ int main()
 				} 
 				a_w_time = wait_time * 1.0 / total;
 				a_t_time = turnaroundd_time * 1.0 / total;
-			  	printf("\n\nŚredni czas oczekiwania:\t%f ms", a_w_time); 
-			  	printf("\nŚredni czas cyklu przetwarzania:\t%f ms\n ", a_t_time); 
+			  	printf("\n\nŚredni czas oczekiwania:\t%f", a_w_time); 
+			  	printf("\nŚredni czas cyklu przetwarzania:\t%f\n ", a_t_time);
 			  	return 0; 
 		break;
 		
